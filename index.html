@@ -2,112 +2,160 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff1e8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme.css" />
     <link rel="stylesheet" href="style.css" />
-    <title>Birthdayyayy</title>
+    <title>Happiest 17th Birthday, Pihu</title>
   </head>
   <body>
-    <nav>
-      <div class="wrapper">
-        <div class="logo"></div>
-        <div class="menu">
-          <svg
-            class="burger-btn"
-            width="32px"
-            height="32px"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M4 18L20 18"
-                stroke="#000000"
-                stroke-width="2"
-                stroke-linecap="round"
-              ></path>
-              <path
-                d="M4 12L20 12"
-                stroke="#000000"
-                stroke-width="2"
-                stroke-linecap="round"
-              ></path>
-              <path
-                d="M4 6L20 6"
-                stroke="#000000"
-                stroke-width="2"
-                stroke-linecap="round"
-              ></path>
-            </g>
-          </svg>
-          <svg
-            class="close-btn"
-            width="32px"
-            height="32px"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M19 5L4.99998 19M5.00001 5L19 19"
-                stroke="#000000"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-          </svg>
-          <ul class="list-items">
-          </ul>
-        </div>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="mark"></div>
+      <div class="date">20 September</div>
+    </header>
+
+    <main class="hero">
+      <div class="hero__text">
+        <h1 class="hero__title">
+          Happiest
+          <span class="hero__age">17th</span>
+          Birthday, Pihu
+          <span class="hero__pet">(Mah Babee<span class="emoji">🥰</span>)</span>
+        </h1>
+        <p class="hero__sub">
+          Picked you a bouquet that will never wilt. Every flower in it is a
+          reason — tap one and see.
+        </p>
       </div>
-    </nav>
-    <main>
-      <div class="main-body container">
-        <section class="landing-page container">
-          <div class="hero-content">
-            <div class="bg-text">Happiest <span class="bg-text__num">18</span>th Birthday Pal <span class="smiley">:)</span></div>
-            <a class="proceed-btn" href="letters.html">Proceed further</a>
-          </div>
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-          <img src="./Assets/Graphics/fog-cloud.png" class="fog" />
-        </section>
+
+      <!-- Bouquet ------------------------------------------------------- -->
+      <div class="bouquet">
+        <svg
+          class="bouquet__svg"
+          viewBox="0 0 360 336"
+          role="img"
+          aria-label="A bouquet of roses and daisies wrapped in paper"
+        >
+          <!-- stems -->
+          <g fill="none" stroke="#6e8b5a" stroke-width="3.5" stroke-linecap="round">
+            <path d="M180,252 C170,202 140,144 122,104" />
+            <path d="M180,252 C180,192 182,122 182,78" />
+            <path d="M180,252 C196,202 228,144 240,108" />
+            <path d="M180,252 C158,212 112,184 92,162" />
+            <path d="M180,252 C206,216 252,192 270,170" />
+            <path d="M180,252 C176,214 166,182 158,158" />
+          </g>
+
+          <!-- leaves -->
+          <g fill="#6e8b5a">
+            <path d="M0,0 C11,-13 29,-13 38,0 C29,13 11,13 0,0Z" transform="translate(146,196) rotate(-38)" opacity=".92" />
+            <path d="M0,0 C11,-13 29,-13 38,0 C29,13 11,13 0,0Z" transform="translate(200,206) rotate(30) scale(-1,1)" opacity=".8" />
+            <path d="M0,0 C9,-11 24,-11 32,0 C24,11 9,11 0,0Z" transform="translate(130,152) rotate(-52)" opacity=".85" />
+            <path d="M0,0 C9,-11 24,-11 32,0 C24,11 9,11 0,0Z" transform="translate(228,166) rotate(38) scale(-1,1)" opacity=".7" />
+            <path d="M0,0 C8,-10 22,-10 30,0 C22,10 8,10 0,0Z" transform="translate(186,158) rotate(-14)" opacity=".6" />
+          </g>
+
+          <!-- baby's breath -->
+          <g fill="#fff8f2" stroke="#e9cfc2" stroke-width="1">
+            <circle cx="112" cy="132" r="4" /><circle cx="128" cy="118" r="3.4" />
+            <circle cx="152" cy="126" r="3.6" /><circle cx="214" cy="132" r="4" />
+            <circle cx="230" cy="142" r="3.2" /><circle cx="256" cy="126" r="3.6" />
+            <circle cx="166" cy="98" r="3.2" /><circle cx="204" cy="86" r="3.4" />
+          </g>
+
+          <!-- blooms -->
+          <g class="bloom" tabindex="0" role="button"
+             aria-label="A rose for how pretty you are"
+             data-note="One for How preety You are babe :)">
+            <circle cx="122" cy="98" r="27" fill="#eb93a5" />
+            <path d="M122,71 a27,27 0 0,1 0,54 a19,19 0 0,0 0,-38 a11,11 0 0,1 0,22 a15,15 0 0,0 0,-30Z" fill="#c24a63" />
+            <circle cx="122" cy="98" r="5" fill="#ab3d55" />
+          </g>
+
+          <g class="bloom" tabindex="0" role="button"
+             aria-label="A daisy for the fit checks"
+             data-note="Your fit checks i admire them a lot :3">
+            <g transform="translate(182,72)">
+              <g fill="#fffaf5" stroke="#f0d9cc" stroke-width="1">
+                <ellipse rx="6.5" ry="16" cy="-17" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(45)" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(90)" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(135)" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(180)" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(225)" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(270)" />
+                <ellipse rx="6.5" ry="16" cy="-17" transform="rotate(315)" />
+              </g>
+              <circle r="9.5" fill="#f2c14e" />
+            </g>
+          </g>
+
+          <g class="bloom" tabindex="0" role="button"
+             aria-label="A rose for the voice notes"
+             data-note="The voice notes you sent to me were vpreety btw 🥰">
+            <circle cx="240" cy="102" r="24" fill="#d9657e" />
+            <path d="M240,78 a24,24 0 0,1 0,48 a17,17 0 0,0 0,-34 a10,10 0 0,1 0,20 a13,13 0 0,0 0,-26Z" fill="#ab3d55" />
+            <circle cx="240" cy="102" r="4.5" fill="#8f3046" />
+          </g>
+
+          <g class="bloom" tabindex="0" role="button"
+             aria-label="A daisy for your birthday"
+             data-note="Happy 17th Birthdayyy babe ❤️">
+            <g transform="translate(90,160)">
+              <g fill="#fffaf5" stroke="#f0d9cc" stroke-width="1">
+                <ellipse rx="5" ry="12.5" cy="-13" />
+                <ellipse rx="5" ry="12.5" cy="-13" transform="rotate(51)" />
+                <ellipse rx="5" ry="12.5" cy="-13" transform="rotate(102)" />
+                <ellipse rx="5" ry="12.5" cy="-13" transform="rotate(153)" />
+                <ellipse rx="5" ry="12.5" cy="-13" transform="rotate(204)" />
+                <ellipse rx="5" ry="12.5" cy="-13" transform="rotate(255)" />
+                <ellipse rx="5" ry="12.5" cy="-13" transform="rotate(306)" />
+              </g>
+              <circle r="7.5" fill="#f2c14e" />
+            </g>
+          </g>
+
+          <g class="bloom" tabindex="0" role="button"
+             aria-label="A rose bud that says love ya"
+             data-note="Love yaa Babe ❤️🤭">
+            <circle cx="270" cy="166" r="19" fill="#f0a3b3" />
+            <path d="M270,147 a19,19 0 0,1 0,38 a13,13 0 0,0 0,-26Z" fill="#c24a63" />
+            <circle cx="270" cy="166" r="4" fill="#ab3d55" />
+          </g>
+
+          <!-- kraft paper sleeve, hand folded -->
+          <path d="M112,232 L248,232 L214,316 Q180,326 146,316 Z" fill="#f3dccd" />
+          <path d="M180,232 L248,232 L214,316 Q198,322 180,323 Z" fill="#e8cab6" />
+          <path d="M112,232 L180,232 L180,323 Q162,322 146,316 Z" fill="#f8e7db" />
+          <path d="M180,234 L180,322" stroke="#dbb9a3" stroke-width="1.4" opacity=".7" />
+          <path d="M112,232 Q180,246 248,232" fill="none" stroke="#dbb9a3" stroke-width="2" />
+
+          <!-- ribbon, tied low on the sleeve -->
+          <path d="M138,272 Q180,284 222,272" fill="none" stroke="#c24a63" stroke-width="6" stroke-linecap="round" />
+          <path d="M176,276 C164,266 148,264 144,273 C151,281 168,282 176,276Z" fill="#d9657e" />
+          <path d="M184,276 C196,266 212,264 216,273 C209,281 192,282 184,276Z" fill="#c24a63" />
+          <path d="M176,280 C172,292 168,300 162,308" fill="none" stroke="#c24a63" stroke-width="4" stroke-linecap="round" />
+          <path d="M185,280 C190,291 195,298 202,305" fill="none" stroke="#d9657e" stroke-width="4" stroke-linecap="round" />
+          <circle cx="180" cy="276" r="4.6" fill="#8f3046" />
+        </svg>
+
+        <p class="bouquet__note" id="bouquetNote" aria-live="polite">tap a flower</p>
       </div>
+
+      <a class="btn proceed-btn" href="letters.html">Open your letter</a>
     </main>
 
-    <footer class="made-by">Made by Shreyansh with ❤️</footer>
+    <footer class="signoff">Made with <span class="emoji">❤️</span> — Shreyansh</footer>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
-      integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
-      integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <script src="petals.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

@@ -2,83 +2,108 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff7f1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme.css" />
     <link rel="stylesheet" href="shreyansh-letter.css" />
-    <title>Birthdayyayy</title>
+    <title>A letter for Pihu 💌</title>
   </head>
   <body>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
     <header class="topbar">
-      <div class="topbar__inner">
-        <a class="back" href="letters.html">Back</a>
-      </div>
+      <a class="back" href="letters.html">Back</a>
+      <div class="mark"></div>
     </header>
 
     <main class="page">
-      <article class="letter" aria-label="Personal birthday letter">
-        <h1 class="letter__title">A Letter From Shreyansh</h1>
-        <div class="letter__meta">
-          <div>Delivered by: <span class="ink">A very polite owl</span></div>
-          <div>Subject: <span class="ink">Your 18th Birthday</span></div>
+      <!-- ============ LOCKED STATE ============ -->
+      <section class="envelope-stage" id="lockedState" aria-label="Locked letter">
+        <div class="envelope" id="envelope" aria-hidden="true">
+          <div class="envelope__paper">
+            <div class="envelope__fold"></div>
+            <div class="envelope__flap"></div>
+            <div class="envelope__seal">P</div>
+          </div>
         </div>
 
-        <div class="rule"></div>
+        <div class="lock-card">
+          <h1 class="lock-card__title">A letter just for you</h1>
+          <p class="lock-card__sub">Enter the password to open it.</p>
 
-        <p class="letter__to">Hey <span class="ink">Pall <span class="smiley">:)</span></span>,</p>
+          <form class="lock-card__form" id="unlockForm" novalidate>
+            <label class="lock-card__label" for="password">Password</label>
+            <input
+              class="lock-card__input"
+              id="password"
+              name="password"
+              type="text"
+              autocomplete="off"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              inputmode="text"
+              placeholder="Hint: What do I always call you? 🤭"
+              aria-describedby="gateError"
+            />
 
-        <p>
-          Happiest 18th birthdayyy Palll 🤍😭
-        </p>
-        <p>
-         
-I genuinely dont even know how to explain how much you mean to me lmao like i cant spend a  day without talking to you now 😭 you became such an  part of my life ngl
-And honestly your insecurities n stuff?  i genuinely dont see them at all to me you are literally one of the cutest and prettiest person ever and your smile is so sunshine coded hehe :) i admire you so much its insane
-        </p>
-        <p>
-          You’ve been through so much shit and still somehow manage to be so caring cute funny and adorable all the time 😭 i genuinely adore everything about you . The way you talk , the way you smile , your reactions , your yapping sessions LMFAOO everything is just so pretty to me
-</p>
-<p>
-  AND YOU LOOK SO CUTEEE WHEN YOU ARE RAGEBAITED 😭😭
-</p>
-<p>
-  Sometimes i genuinely think why did you even choose me lmao but i swear im so grateful that you did . I never ever wanna lose you and id genuinely do anything to not lose you . I havent cared about anyone this much in so long and you’re literally the only person with whom i can open up without overthinking anything
-</p>
-<p>
-  Thank you for being in my life fr 🤍 you make my days sm better without even realizing it
-</p>
-<p>Happy Birthday Pallu the Bhallu / Vekhlii/ Psyduck / Togepi 🥰💗</p>
-        <p class="letter__closing">Always there for yaa,</p>
-        <p class="letter__sig"><span class="ink">Shreyansh <span class="smiley">:)</span></span></p>
+            <div class="lock-card__error" id="gateError" role="status" aria-live="polite"></div>
+
+            <button class="btn unlock-btn" id="unlockBtn" type="submit">
+              Open the letter
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ UNLOCKED STATE ============ -->
+      <article class="letter is-hidden" id="letter" aria-label="Personal birthday letter">
+        <div class="letter__wax" aria-hidden="true">P</div>
+
+        <h1 class="letter__title">For mah babe, on her 17th</h1>
+
+        <div class="letter__body">
+          <p>Soo Hii Pihu (mah babee 🤭😭):)</p>
+
+          <p>
+            Happiestt Birthdayy to you 😭 You know i didnt ever expect to text
+            someone randomly and get so attached to ever in my life lol :3 I love
+            the way you areee Veryy Preetyy Chaotic (keep sending me the fit
+            checks i admire all of them babe 🥰). whatever your insecurities are
+            please trash them out you're perfect and Yessss i will stayy forever
+            with you and listen to every teaa :) and be with you at all times i
+            aint leaving you babe lol 😭.And btw the voice notes you sent me
+            yesterday i am still listening to it and blusing to em like how can
+            someone have such cute voice hehe I still remember our early chats
+            and you told you dont talk to many people especially random one's but
+            you still did talk with me . i would be forever gratefull for that
+            Thankss 😭🥰
+          </p>
+
+          <p>Yayayay Happy 17th Birthdayy to mah babe love yaa ❤️🥰🤭</p>
+        </div>
+
+        <p class="letter__closing">always yours,</p>
+        <p class="letter__sig">Shreyansh :)</p>
       </article>
     </main>
 
-    <!-- Password gate (client-side) -->
-    <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Password required">
-      <div class="gate__card">
-        <div class="gate__title">Password Required</div>
-        <div class="gate__subtitle">Enter the secret word to open this letter.</div>
+    <footer class="signoff">Made with <span class="emoji">❤️</span> — Shreyansh</footer>
 
-        <label class="gate__label" for="password">Password</label>
-        <input
-          class="gate__input"
-          id="password"
-          type="password"
-          autocomplete="off"
-          inputmode="text"
-          placeholder="Type here"
-        />
-
-        <div class="gate__error" id="gateError" aria-live="polite"></div>
-
-        <button class="gate__btn" id="unlockBtn" type="button">Unlock</button>
-      </div>
-    </div>
-
+    <script src="vendor/confetti.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
       integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="petals.js"></script>
     <script src="shreyansh-letter.js"></script>
   </body>
 </html>

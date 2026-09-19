@@ -1,268 +1,235 @@
-/* Reuse the same theme primitives as letters.css (no new color system) */
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Monte";
-  src: url("./Assets/montserrat.regular.ttf");
-}
-
-@font-face {
-  font-family: "MonteBold";
-  src: url("./Assets/montserrat.bold.ttf");
-}
-
-@font-face {
-  font-family: "Dreamer";
-  src: url("./Assets/AdventureDreamer-pmvR.ttf");
-}
-
-@font-face {
-  font-family: "Summer";
-  src: url("./Assets/welcome-summer.regular.ttf");
-}
-
-::selection {
-  color: #d8ebeb;
-  background: #313536;
-}
-
-body {
-  min-height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
-  font-family: "Monte";
-  color: #313536;
-  background: url("./Assets/Graphics/bg3.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(216, 235, 235, 0.22), rgba(216, 235, 235, 0) 55%),
-    radial-gradient(circle at 80% 90%, rgba(49, 53, 54, 0.16), rgba(49, 53, 54, 0) 60%),
-    linear-gradient(180deg, rgba(216, 235, 235, 0.16), rgba(49, 53, 54, 0.08));
-  pointer-events: none;
-}
-
-/* Top bar */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  backdrop-filter: blur(18px);
-  background: rgba(216, 235, 235, 0.2);
-  border-bottom: 1px solid rgba(49, 53, 54, 0.15);
-}
-
-.topbar__inner {
-  width: min(900px, 92vw);
-  margin: 0 auto;
-  height: 10vh;
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.brand {
-  font-family: "MonteBold";
-  letter-spacing: 0.6px;
-}
-
-.back {
-  text-decoration: none;
-  color: #313536;
-  font-family: "MonteBold";
-  border: 1px solid rgba(49, 53, 54, 0.35);
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(216, 235, 235, 0.18);
-  transition: transform 200ms ease, background 200ms ease, color 200ms ease, border-color 200ms ease;
-}
-
-.back:hover {
-  color: rgba(154, 205, 50, 0.75);
-  border-color: rgba(154, 205, 50, 0.45);
-  transform: translateY(-2px);
-  background: rgba(216, 235, 235, 0.24);
-}
-
+/* ==========================================================================
+   Sealed envelope → handwritten letter
+   ========================================================================== */
 .page {
-  width: min(900px, 92vw);
-  margin: 0 auto;
-  padding: 28px 0 56px;
-}
-
-.letter {
-  position: relative;
-  border-radius: 18px;
-  border: 1px solid rgba(49, 53, 54, 0.25);
-  overflow: hidden;
-  padding: 28px 24px 26px;
-}
-
-.letter::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(216, 235, 235, 0.52), rgba(216, 235, 235, 0.2) 55%),
-    radial-gradient(circle at 90% 30%, rgba(49, 53, 54, 0.14), rgba(49, 53, 54, 0) 60%),
-    linear-gradient(135deg, rgba(216, 235, 235, 0.46), rgba(216, 235, 235, 0.26));
-  filter: sepia(0.75) saturate(1.1) hue-rotate(-15deg);
-}
-
-.letter > * {
   position: relative;
   z-index: 2;
+  width: min(720px, 90vw);
+  margin: 0 auto;
+  padding: 40px 0 70px;
 }
 
-.letter__title {
-  font-family: "Dreamer";
-  font-size: 38px;
-  line-height: 1.05;
-  text-align: center;
-  margin-bottom: 10px;
+.is-hidden { display: none !important; }
+
+/* Locked ------------------------------------------------------------------- */
+.envelope-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
 }
 
-.letter__meta {
-  font-size: 14px;
-  opacity: 0.9;
-  text-align: center;
-  display: grid;
-  gap: 4px;
+.envelope {
+  width: min(300px, 70vw);
+  perspective: 900px;
 }
 
-.rule {
-  height: 1px;
+.envelope__paper {
+  position: relative;
   width: 100%;
-  background: rgba(49, 53, 54, 0.28);
-  margin: 18px 0;
+  aspect-ratio: 3 / 2;
+  border-radius: 10px;
+  background: linear-gradient(170deg, #fbe4d6, #f3d3c2);
+  border: 1px solid rgba(74, 34, 48, 0.12);
+  box-shadow: 0 18px 34px rgba(74, 34, 48, 0.14);
 }
 
-.letter__to {
-  font-family: "MonteBold";
-  margin-bottom: 14px;
-}
-
-.letter p {
-  font-size: 15px;
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-
-.letter__closing {
-  margin-top: 18px;
-  margin-bottom: 8px;
-}
-
-.letter__sig {
-  font-family: "Summer";
-  font-size: 32px;
-  margin-bottom: 2px;
-}
-
-.ink {
-  font-family: "MonteBold";
-  letter-spacing: 0.2px;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-
-.smiley {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  font-weight: 700;
-}
-
-/* Gate overlay */
-.gate {
-  position: fixed;
+/* the two folds that read as an envelope front */
+.envelope__fold {
+  position: absolute;
   inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background:
+    linear-gradient(46deg, transparent calc(50% - 1px), rgba(255, 255, 255, 0.6) 50%, transparent calc(50% + 1px)),
+    linear-gradient(-46deg, transparent calc(50% - 1px), rgba(255, 255, 255, 0.6) 50%, transparent calc(50% + 1px));
+}
+
+.envelope__flap {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -1px;
+  height: 62%;
+  background: linear-gradient(170deg, #f7d9c8, #eec4af);
+  border: 1px solid rgba(74, 34, 48, 0.12);
+  border-radius: 10px 10px 0 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 720ms cubic-bezier(0.5, 0, 0.2, 1);
+  z-index: 3;
+}
+
+.envelope--open .envelope__flap { transform: rotateX(-173deg); }
+
+.envelope__seal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  width: 52px;
+  height: 52px;
   display: grid;
   place-items: center;
-  z-index: 10000;
-  background: rgba(49, 53, 54, 0.35);
-  backdrop-filter: blur(18px);
-  padding: 20px;
+  border-radius: 999px;
+  background: var(--rose);
+  color: #fff1e8;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 22px;
+  box-shadow: inset 0 0 0 3px rgba(255, 241, 232, 0.35), 0 6px 14px rgba(74, 34, 48, 0.2);
+  transition: opacity 300ms ease, transform 400ms ease;
 }
 
-.gate__card {
-  width: min(440px, 92vw);
-  border-radius: 18px;
-  border: 1px solid rgba(216, 235, 235, 0.35);
-  background: rgba(216, 235, 235, 0.18);
-  padding: 22px 18px 18px;
+.envelope--open .envelope__seal { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+
+.lock-card {
+  width: min(430px, 100%);
+  text-align: center;
 }
 
-.gate__title {
-  font-family: "MonteBold";
-  font-size: 18px;
+.lock-card__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(26px, 5vw, 34px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   margin-bottom: 6px;
 }
 
-.gate__subtitle {
-  opacity: 0.9;
+.lock-card__sub {
   font-size: 14px;
-  margin-bottom: 14px;
+  color: var(--plum-soft);
+  margin-bottom: 22px;
 }
 
-.gate__label {
+.lock-card__label {
   display: block;
-  font-family: "MonteBold";
+  text-align: left;
+  font-family: var(--bodybold);
   font-size: 13px;
   margin-bottom: 8px;
+  color: var(--plum-soft);
 }
 
-.gate__input {
+.lock-card__input {
   width: 100%;
-  border-radius: 12px;
-  padding: 12px 12px;
-  border: 1px solid rgba(49, 53, 54, 0.35);
+  padding: 15px 18px;
+  font-size: 15px;
+  font-family: var(--body);
+  color: var(--plum);
+  background: #fffaf4;
+  border: 1.5px solid rgba(74, 34, 48, 0.16);
+  border-radius: 14px;
   outline: none;
-  background: rgba(216, 235, 235, 0.22);
-  color: #313536;
-  font-family: "Monte";
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
-.gate__error {
-  min-height: 18px;
-  margin-top: 10px;
-  font-size: 13px;
+.lock-card__input::placeholder { color: rgba(74, 34, 48, 0.4); }
+
+.lock-card__input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(194, 74, 99, 0.12);
 }
 
-.gate__btn {
-  width: 100%;
+.lock-card__error {
+  min-height: 22px;
   margin-top: 10px;
-  padding: 12px 18px;
+  font-family: var(--hand);
+  font-size: 21px;
+  color: var(--rose);
+}
+
+.unlock-btn { width: 100%; margin-top: 8px; }
+
+.shake { animation: shake 420ms ease; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(3px); }
+}
+
+/* Unlocked ----------------------------------------------------------------- */
+.letter {
+  position: relative;
+  padding: 46px 40px 40px;
+  border-radius: 8px 8px 20px 20px;
+  background: #fffaf3;
+  border: 1px solid rgba(74, 34, 48, 0.1);
+  box-shadow: 0 22px 50px rgba(74, 34, 48, 0.12);
+}
+
+.letter__wax {
+  position: absolute;
+  top: -18px;
+  right: 34px;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
   border-radius: 999px;
-  cursor: pointer;
-  color: #313536;
-  font-family: "MonteBold";
-  font-size: 14px;
-  letter-spacing: 0.4px;
-  border: 1px solid rgba(49, 53, 54, 0.45);
-  background: rgba(216, 235, 235, 0.18);
-  transition: transform 200ms ease, background 200ms ease, color 200ms ease,
-    border-color 200ms ease;
+  background: var(--rose);
+  color: #fff1e8;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 21px;
+  box-shadow: inset 0 0 0 3px rgba(255, 241, 232, 0.35), 0 8px 16px rgba(74, 34, 48, 0.18);
 }
 
-.gate__btn:hover {
-  color: rgba(154, 205, 50, 0.75);
-  border-color: rgba(154, 205, 50, 0.45);
-  transform: translateY(-2px);
-  background: rgba(216, 235, 235, 0.24);
+.letter__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(26px, 4.6vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 26px;
+  max-width: 14ch;
 }
 
-.gate--hidden {
-  display: none;
+.letter__body p {
+  font-family: var(--hand);
+  font-size: clamp(21px, 3.3vw, 25px);
+  line-height: 1.6;
+  color: #3f2029;
+  margin-bottom: 20px;
+}
+
+.letter__closing {
+  font-family: var(--hand);
+  font-size: 23px;
+  color: var(--plum-soft);
+  margin-top: 26px;
+}
+
+.letter__sig {
+  font-family: "Summer", var(--hand);
+  font-size: 30px;
+  color: var(--rose);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope__flap, .envelope__seal { transition: none; }
+  .shake { animation: none; }
+}
+
+@media screen and (max-width: 520px) {
+  .letter { padding: 36px 24px 30px; }
+  .letter__wax { right: 22px; width: 44px; height: 44px; font-size: 18px; }
+}
+
+.signoff {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px calc(30px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-family: var(--hand);
+  font-size: 26px;
+  color: var(--rose);
+}
+
+@media screen and (max-width: 520px) {
+  .signoff { font-size: 23px; }
 }

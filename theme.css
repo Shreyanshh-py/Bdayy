@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Shared theme — Pihu's 17th
+   ========================================================================== */
+* { padding: 0; margin: 0; box-sizing: border-box; }
+
+@font-face { font-family: "Monte"; src: url("./Assets/montserrat.regular.ttf"); font-display: swap; }
+@font-face { font-family: "MonteBold"; src: url("./Assets/montserrat.bold.ttf"); font-display: swap; }
+@font-face { font-family: "Summer"; src: url("./Assets/welcome-summer.regular.ttf"); font-display: swap; }
+
+:root {
+  --paper: #fff1e8;
+  --paper-warm: #ffe6da;
+  --rose: #c24a63;
+  --rose-light: #e8879b;
+  --blush: #f7cfd4;
+  --plum: #4a2230;
+  --plum-soft: rgba(74, 34, 48, 0.68);
+  --sage: #6e8b5a;
+  --yellow: #f2c14e;
+  --night: #191430;
+
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --body: "Monte", system-ui, -apple-system, sans-serif;
+  --bodybold: "MonteBold", system-ui, sans-serif;
+  --hand: "Caveat", "Segoe Script", "Bradley Hand", cursive;
+}
+
+::selection { color: var(--paper); background: var(--rose); }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100svh;
+  font-family: var(--body);
+  color: var(--plum);
+  background:
+    radial-gradient(120% 90% at 50% -10%, #fff9f4 0%, var(--paper) 45%, var(--paper-warm) 100%);
+  overflow-x: hidden;
+}
+
+.emoji { font-family: system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif; }
+
+/* Falling petals + leaves --------------------------------------------------- */
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -8vh;
+  width: 14px;
+  height: 14px;
+  border-radius: 50% 0 50% 0;
+  opacity: 0.75;
+  animation: fall linear infinite;
+  will-change: transform;
+}
+
+.petal--leaf {
+  border-radius: 0 76% 0 76%;
+  width: 18px;
+  height: 10px;
+}
+
+@keyframes fall {
+  0%   { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+  25%  { transform: translate3d(28px, 20vh, 0) rotate(70deg); }
+  50%  { transform: translate3d(-22px, 50vh, 0) rotate(160deg); }
+  75%  { transform: translate3d(26px, 78vh, 0) rotate(250deg); }
+  100% { transform: translate3d(-10px, 112vh, 0) rotate(360deg); }
+}
+
+/* Buttons ------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--rose);
+  color: #fff6f2;
+  font-family: var(--bodybold);
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 10px 24px rgba(194, 74, 99, 0.26);
+  transition: background 200ms ease, transform 160ms ease, box-shadow 200ms ease;
+}
+
+.btn:hover { background: #ab3d55; transform: translateY(-2px); box-shadow: 0 14px 28px rgba(194, 74, 99, 0.3); }
+.btn:active { transform: translateY(0) scale(0.98); }
+
+:where(a, button, input):focus-visible {
+  outline: 2.5px solid var(--rose);
+  outline-offset: 3px;
+}
+
+/* Small top bar ------------------------------------------------------------- */
+.topbar {
+  position: relative;
+  z-index: 5;
+  width: min(1000px, 90vw);
+  margin: 0 auto;
+  padding-top: calc(22px + env(safe-area-inset-top, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.mark {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.mark em { font-family: var(--hand); font-style: normal; font-size: 22px; color: var(--rose); }
+
+.back {
+  font-family: var(--bodybold);
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--plum-soft);
+  border-bottom: 1px solid rgba(74, 34, 48, 0.25);
+  padding-bottom: 2px;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.back:hover { color: var(--rose); border-color: var(--rose); }
+
+@media (prefers-reduced-motion: reduce) {
+  .petal { display: none; }
+  html { scroll-behavior: auto; }
+}

@@ -1,111 +1,153 @@
-const gate = document.getElementById("gate");
-const gateCard = document.querySelector(".gate__card");
+/* Secret envelope: password gate → envelope opens → letter + heart confetti. */
+
+const lockedState = document.getElementById("lockedState");
+const envelope = document.getElementById("envelope");
+const unlockForm = document.getElementById("unlockForm");
 const passwordInput = document.getElementById("password");
 const unlockBtn = document.getElementById("unlockBtn");
 const gateError = document.getElementById("gateError");
-const letter = document.querySelector("main .letter");
+const letter = document.getElementById("letter");
+const lockCard = document.querySelector(".lock-card");
 
-const PASSWORD = "togepi";
+/* Case-insensitive, whitespace-tolerant. */
+const PASSWORDS = ["babe", "babee", "mah babe", "my babe"];
+
+const TEASES = [
+  "Nope, try what I call you! 🤭",
+  "Not it babe... wait, that's a hint 👀",
+  "Hmm nope. Think about my texts 🤭💭",
+  "Sooo close, try again pretty 🌸",
+];
+let teaseIndex = 0;
 
 function playSuccessSound() {
-  // Prefer user-provided MP3.
   try {
     const audio = new Audio("./Sounds/togepi.mp3");
     audio.preload = "auto";
-    audio.volume = 0.75;
+    audio.volume = 0.7;
     const p = audio.play();
-    // In some browsers play() returns a promise that may reject.
     if (p && typeof p.catch === "function") p.catch(() => {});
-    return;
   } catch {
-    // fall through
+    // no-op — sound is a bonus, never a blocker
+  }
+}
+
+function heartBurst() {
+  if (typeof confetti !== "function") return;
+
+  const heart = confetti.shapeFromText
+    ? confetti.shapeFromText({ text: "❤️", scalar: 2 })
+    : null;
+
+  const base = {
+    spread: 80,
+    ticks: 200,
+    gravity: 0.9,
+    scalar: 1.2,
+    colors: ["#c24a63", "#e8879b", "#f2c14e", "#6e8b5a", "#fff1e8"],
+  };
+
+  confetti({ ...base, particleCount: 90, origin: { x: 0.5, y: 0.55 } });
+  setTimeout(
+    () => confetti({ ...base, particleCount: 60, angle: 60, origin: { x: 0, y: 0.7 } }),
+    180
+  );
+  setTimeout(
+    () => confetti({ ...base, particleCount: 60, angle: 120, origin: { x: 1, y: 0.7 } }),
+    320
+  );
+
+  if (heart) {
+    setTimeout(
+      () =>
+        confetti({
+          particleCount: 26,
+          spread: 100,
+          scalar: 2,
+          shapes: [heart],
+          origin: { x: 0.5, y: 0.5 },
+        }),
+      420
+    );
+  }
+}
+
+function revealLetter() {
+  lockedState.classList.add("is-hidden");
+  letter.classList.remove("is-hidden");
+
+  if (typeof gsap !== "undefined") {
+    gsap.fromTo(
+      letter,
+      { opacity: 0, y: 40, scale: 0.96, rotate: -1 },
+      { opacity: 1, y: 0, scale: 1, rotate: 0, duration: 0.9, ease: "power3.out" }
+    );
+    gsap.fromTo(
+      letter.querySelectorAll(".letter__body p, .letter__closing, .letter__sig"),
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, delay: 0.25, ease: "power2.out" }
+    );
   }
 
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
+  letter.scrollIntoView({ behavior: "smooth", block: "start" });
+  heartBurst();
+}
 
-    const ctx = new AudioContext();
-    const startAt = ctx.currentTime + 0.02;
+function unlock(e) {
+  if (e) e.preventDefault();
 
-    const master = ctx.createGain();
-    master.gain.setValueAtTime(0.0001, startAt);
-    master.gain.exponentialRampToValueAtTime(0.25, startAt + 0.02);
-    master.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.9);
-    master.connect(ctx.destination);
+  const input = passwordInput.value || "";
+  const cleanedInput = input.trim().toLowerCase();
 
-    const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
-    notes.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(freq, startAt + i * 0.08);
+  if (!PASSWORDS.includes(cleanedInput)) {
+    gateError.textContent = TEASES[teaseIndex % TEASES.length];
+    teaseIndex++;
 
-      gain.gain.setValueAtTime(0.0001, startAt + i * 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.18, startAt + i * 0.08 + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startAt + i * 0.08 + 0.22);
+    lockCard.classList.remove("shake");
+    void lockCard.offsetWidth; // restart the animation
+    lockCard.classList.add("shake");
 
-      osc.connect(gain);
-      gain.connect(master);
+    passwordInput.focus();
+    passwordInput.select();
+    return;
+  }
 
-      osc.start(startAt + i * 0.08);
-      osc.stop(startAt + i * 0.08 + 0.25);
+  gateError.textContent = "";
+  passwordInput.value = "";
+  passwordInput.blur();
+  unlockBtn.disabled = true;
+
+  playSuccessSound();
+
+  // Open the flap first, then swap in the letter.
+  envelope.classList.add("envelope--open");
+
+  if (typeof gsap !== "undefined") {
+    gsap.to(lockCard, {
+      opacity: 0,
+      y: 16,
+      scale: 0.97,
+      duration: 0.45,
+      delay: 0.35,
+      ease: "power2.inOut",
     });
-
-    // Cleanup
-    setTimeout(() => {
-      ctx.close?.();
-    }, 1200);
-  } catch {
-    // no-op
-  }
-}
-
-function unlock() {
-  const typed = (passwordInput.value || "").trim();
-
-  if (typed === PASSWORD) {
-    passwordInput.value = "";
-    gateError.textContent = "";
-
-    playSuccessSound();
-
-    // Animate the gate away, then hide it.
-    if (typeof gsap !== "undefined") {
-      const tl = gsap.timeline({
-        defaults: { ease: "power2.inOut" },
-        onComplete: () => gate.classList.add("gate--hidden"),
-      });
-
-      if (gateCard) {
-        tl.to(gateCard, { y: -14, scale: 0.98, opacity: 0, duration: 0.45 }, 0);
-      }
-      tl.to(gate, { opacity: 0, duration: 0.45 }, 0.08);
-
-      if (letter) {
-        tl.fromTo(
-          letter,
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.85, ease: "power2.out" },
-          0.2
-        );
-      }
-    } else {
-      gate.classList.add("gate--hidden");
-    }
-    return;
+    gsap.to(envelope, {
+      opacity: 0,
+      y: -24,
+      scale: 1.08,
+      duration: 0.5,
+      delay: 0.6,
+      ease: "power2.in",
+    });
   }
 
-  gateError.textContent = "Wrong password. Try again.";
-  passwordInput.focus();
-  passwordInput.select();
+  setTimeout(revealLetter, 1000);
 }
 
-unlockBtn.addEventListener("click", unlock);
+unlockForm.addEventListener("submit", unlock);
 
-passwordInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") unlock();
+passwordInput.addEventListener("input", () => {
+  if (gateError.textContent) gateError.textContent = "";
 });
 
-// Focus input on load
-passwordInput.focus();
+passwordInput.focus({ preventScroll: true });

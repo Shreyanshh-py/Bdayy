@@ -2,43 +2,79 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff1e8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme.css" />
     <link rel="stylesheet" href="letters.css" />
-    <title>Birthdayyayy</title>
+    <title>Your song, and a sealed letter</title>
   </head>
   <body>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
     <header class="topbar">
-      <div class="topbar__inner">
-        <a class="back" href="index.html">Back</a>
-      </div>
+      <a class="back" href="index.html">Back to the bouquet</a>
+      <div class="mark"></div>
     </header>
 
-    <main class="page">
-      <section class="letters" aria-label="Birthday letters">
-        <article class="letter letter--image" aria-label="Hogwarts acceptance letter image">
-          <img
-            class="hogwarts__scan"
-            src="./Assets/Graphics/hogwarts-letter.png"
-            alt="Hogwarts acceptance letter"
-          />
-        </article>
-
-        <article class="letter" aria-label="Locked personal letter">
-          <h2 class="letter__title">A Letter From Shreyansh</h2>
-          <div class="letter__meta">
-            <div>Status: <span class="ink">Locked</span></div>
-            <div>Password required to open</div>
-          </div>
-
-          <div class="rule"></div>
-
-          <p>
-            A private note is sealed inside this envelope. Tap below and enter the password to reveal it.
+    <main class="stack">
+      <!-- Her song -------------------------------------------------------- -->
+      <section class="song" aria-labelledby="songTitle">
+        <div class="song__words">
+          <p class="song__kicker">and if you were a song</p>
+          <h1 class="song__title" id="songTitle">Perfect</h1>
+          <p class="song__body">
+            Ed Sheeran got there first, but he was clearly writing about you.
+            Every insecurity you keep listing — none of them made it into the
+            song. You're perfect babe, exactly as you are.
           </p>
 
-          <a class="open-letter-btn" href="shreyansh-letter.html">Open the letter</a>
-        </article>
+          <div class="player">
+            <iframe
+              title="Perfect by Ed Sheeran on Spotify"
+              src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator"
+              width="100%"
+              height="80"
+              frameborder="0"
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            ></iframe>
+            <p class="player__hint">press play babe ❤️</p>
+          </div>
+        </div>
+
+        <svg class="song__vinyl" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="98" fill="#4a2230" />
+          <g fill="none" stroke="#6d4250" stroke-width="1">
+            <circle cx="100" cy="100" r="88" /><circle cx="100" cy="100" r="80" />
+            <circle cx="100" cy="100" r="72" /><circle cx="100" cy="100" r="64" />
+            <circle cx="100" cy="100" r="56" />
+          </g>
+          <circle cx="100" cy="100" r="42" fill="#c24a63" />
+          <path d="M100,84 C104,75 118,75 121,85 C124,95 110,105 100,114 C90,105 76,95 79,85 C82,75 96,75 100,84Z" fill="#fff1e8" opacity=".92" />
+          <circle cx="100" cy="100" r="5" fill="#fff1e8" />
+        </svg>
+      </section>
+
+      <!-- The sealed letter ----------------------------------------------- -->
+      <section class="sealed">
+        <div class="sealed__wax" aria-hidden="true">P</div>
+        <h2 class="sealed__title">One sealed letter</h2>
+        <p class="sealed__body">
+          Written for your 17th and closed with a password. It's the thing I
+          always call you — you'll get it on the first try.
+        </p>
+        <a class="btn" href="shreyansh-letter.html">Open the envelope</a>
       </section>
     </main>
+
+    <footer class="signoff">Made with <span class="emoji">❤️</span> — Shreyansh</footer>
+
+    <script src="petals.js"></script>
   </body>
 </html>
